@@ -66,12 +66,26 @@ function Register() {
       }}
       noValidate
       autoComplete="off"
-    >
-      <Box sx={{ margin: "0", fontSize: "21px", textAlign: "center" }}>
-        {" "}
+    ><Box sx={{
+        margin:'auto',
+        display:'flex',
+
+      }}>
+     
+      <Box
+        sx={{
+          margin: "0",
+          fontSize: "20px",
+          boxSizing: "border-box",
+          display: "inline",
+          height: "auto",
+          textAlign: "center",
+        }}
+        >
         Your e-mail adress will be your username. please choose a proper e-mail
         adress
       </Box>
+        </Box>
       <Box
         sx={{
           "& > :not(style)": {
