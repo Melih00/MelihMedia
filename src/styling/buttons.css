@@ -1,0 +1,57 @@
+.buttonForHover *{
+transition: all 150ms linear;
+}
+.icon{
+    opacity: 0;
+}
+.text{
+    opacity: 1;
+}
+.buttonForHover:hover .icon{
+    opacity: 1;
+}
+.buttonForHover:hover .text{
+    opacity: 0;
+}
+/**
+ * Typing animation with pure CSS. 
+ * Works best in browsers supporting the ch unit.
+ */
+
+ @keyframes typing { from { width: 0; } }
+ @keyframes blink-caret { 50% { border-color: transparent; } }
+ 
+ .welcomeText { 
+   color:#111;
+     font: bold 111% Consolas, Monaco, monospace;
+     border-right: .1em solid;
+     /* width: 250em; */
+     max-width: 90%;
+     width: 24ch; /* Ne kadar yazı yazacaksanız karakter sayacında sayıp buraya karakter sayısı kadar yazın. */
+     margin: 2em 1em;
+     font-size: 2rem;
+     white-space: nowrap; 
+     overflow: hidden;
+     animation: typing 2200ms steps(300, end), /* # Adımlar = # Karakter Sayısı */
+                blink-caret 0.37s step-end infinite alternate;
+ }
+ @media screen and (max-width: 600px) {
+    .welcomeText {
+        font-size: 1.6rem;
+    }
+  }
+ @media screen and (max-width: 400px) {
+    .welcomeText {
+        font-size: 1.3rem;
+    }
+  }
+ @media screen and (max-width: 300px) {
+    .welcomeText {
+        font-size: 1.1rem;
+    }
+  }
+ @media screen and (max-width: 250px) {
+    .welcomeText {
+        font-size: 1rem;
+    }
+  }
