@@ -62,7 +62,7 @@ const Navbar = () => {
               𝓜𝓮𝓵𝓲𝓱𝓜𝓮𝓭𝓲𝓪
             </Typography>
             <Button
-              onClick={() => console.log(firebase.auth().currentUser)}
+     
               sx={{ margin: "0px" }}
               color="inherit"
             >

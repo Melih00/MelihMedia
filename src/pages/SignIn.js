@@ -33,11 +33,9 @@ function SignIn() {
   const dispatch = useDispatch();
   const handleSignIn = async () => {
     await firebase.signIn(email, values.password);
-    console.log("signedIn");
     await Firebase.auth().onAuthStateChanged(() => {
       if (Firebase.auth().currentUser) {
         setTimeout(() => {
-          console.log(Firebase.auth().currentUser);
           dispatch(userLogin(true));
           history.push("/posts");
           setEmail("");

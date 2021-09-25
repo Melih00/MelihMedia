@@ -30,7 +30,6 @@ export default function TemporaryDrawer() {
   const showOwnPosts = useSelector((state) => state.user.showMyPosts);
   const [newPost, setNewPost] = React.useState("My Posts");
   const handleDispatch = () => {
-    console.log(showOwnPosts);
     dispatch(showMyPosts(!showOwnPosts));
     showOwnPosts ? setNewPost("My Posts") : setNewPost("All Posts");
   };

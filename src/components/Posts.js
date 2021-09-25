@@ -35,7 +35,6 @@ const ExpandMore = styled((props) => {
   }),
 }));
 const Posts = () => {
-  console.log("rendered");
   const dispatch = useDispatch();
   const { postList } = useFetch();
   const matches = useMediaQuery("(min-width:800px)");

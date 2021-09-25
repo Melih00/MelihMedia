@@ -31,7 +31,6 @@ const signInWithGoogle = async () => {
       return true;
     }
   } catch (err) {
-    console.error(err);
     alert(err.message);
   }
   return false;
@@ -42,7 +41,6 @@ export const signIn = (email, password) => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      console.log(userCredential);
       firebase.auth().currentUser.like = {};
     })
     .catch((error) => {
@@ -69,7 +67,6 @@ const sendPasswordResetEmail = async (email) => {
     await auth.sendPasswordResetEmail(email);
     alert("Password reset link sent!");
   } catch (err) {
-    console.error(err);
     alert(err.message);
   }
 };
