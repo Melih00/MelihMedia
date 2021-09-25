@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "postinstall": "ng build --aot",
-  "scripts": {
-    "heroku-postbuild": "npm run build"
-},
+
 "engines": {
     "npm": "5.6.0",
     "node": "14.15.4"
@@ -33,7 +31,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start",    "heroku-postbuild": "npm run build",
+
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
