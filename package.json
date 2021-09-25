@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "postinstall": "ng build --aot",
-
-"engines": {
+  "engines": {
     "npm": "5.6.0",
     "node": "14.15.4"
-  }
-,
+  },
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
@@ -31,8 +29,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",    "heroku-postbuild": "npm run build",
-
+    "start": "react-scripts start",
+    "heroku-postbuild": "npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
