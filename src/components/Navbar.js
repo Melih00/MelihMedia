@@ -8,7 +8,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import firebase from "firebase";
-import { useDispatch, useSelector } from "react-redux";
 import TemporaryDrawer from "./TemporaryDrawer";
 import { ListItemIcon } from "@mui/material";
 
@@ -28,8 +27,7 @@ const Navbar = () => {
     firebase.auth()?.signOut();
     window.location.reload();
   };
-  const dispatch = useDispatch();
-  const didUserLogin = useSelector((state) => state.user.isUserLogin);
+
 
   return (
     <ThemeProvider theme={theme}>

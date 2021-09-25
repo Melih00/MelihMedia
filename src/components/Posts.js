@@ -35,8 +35,6 @@ const ExpandMore = styled((props) => {
   }),
 }));
 const Posts = () => {
-  const controller = new AbortController()
-  const signal = controller.signal
   console.log("rendered");
   const dispatch = useDispatch();
   const { postList } = useFetch();
