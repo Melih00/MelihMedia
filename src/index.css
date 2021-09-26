@@ -5,7 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: 60px 300px;
+  padding: 66px 0px;
+}
+  /* padding: 60px 300px;
   box-sizing: border-box;
 }
 @media screen and (max-width: 1350px) {
@@ -28,4 +30,4 @@ body {
     padding: 60px 0px;
 
   }
-}
+} */

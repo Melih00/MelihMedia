@@ -19,12 +19,14 @@ export default function Modals({ e}) {
   left: "50%",
   transform: "translate(-50%, -50%)",
   maxWidth: '97%',
-  width: matches ? '80%' : '100%',
+  width: matches ? '85%' : '100%',
   borderRadius: "3%",
   bgcolor: "transparent",
   padding:'0',
   overflow:'auto',
-  maxHeight:'90vh'
+  textAlign:'center',
+  overflowX:'hidden',
+  maxHeight:'96vh'
 };
     return (
     <div>
@@ -43,7 +45,7 @@ export default function Modals({ e}) {
       >
         <Fade in={open}>
           <Box className='modalImg' sx={style}>
-            <ModalImg src={e.img} />
+            <ModalImg src={e.img} />z
           </Box>
         </Fade>
       </Modal>

@@ -17,7 +17,6 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
 export default function TemporaryDrawer() {
   const didUserLogin = useSelector((state) => state.user.isUserLogin);
   const [state, setState] = React.useState({
@@ -29,6 +28,7 @@ export default function TemporaryDrawer() {
   const dispatch = useDispatch();
   const showOwnPosts = useSelector((state) => state.user.showMyPosts);
   const [newPost, setNewPost] = React.useState("My Posts");
+  
   const handleDispatch = () => {
     dispatch(showMyPosts(!showOwnPosts));
     showOwnPosts ? setNewPost("My Posts") : setNewPost("All Posts");
@@ -56,7 +56,7 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {[newPost, "New Post"].map((text, index) =>
+        {[ newPost, "New Post"].map((text, index) =>
           text === "New Post" ? (
             <ListItem onClick={() => handleHistory()} button key={text}>
               <ListItemIcon>
@@ -91,6 +91,8 @@ export default function TemporaryDrawer() {
                   firebase.auth().signOut();
                   window.location.reload();
                 }, 1000);
+              }else if (text === 'GitHub'){
+                window.location = ('https://github.com/Melih00/MelihMedia')
               }
             }}
             button

@@ -18,11 +18,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { copyToClipboard } from "./functions";
 import SignIn from "../pages/SignIn";
 import { deleteHandler, useFetch } from "../firebase/database";
-import { setShowWelcome} from "../redux/actions/actions";
+import { setShowWelcome } from "../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 import { DeleteOutline } from "@mui/icons-material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { Box } from "@mui/system";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -34,14 +35,21 @@ const ExpandMore = styled((props) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
-const Posts = () => {
+const Posts = ({checked}) => {
   const dispatch = useDispatch();
   const { postList } = useFetch();
-  const matches = useMediaQuery("(min-width:800px)");
+  const matches400 = useMediaQuery("(min-width:400px)");
+  const matches600 = useMediaQuery("(min-width:600px)");
+  const matches800 = useMediaQuery("(min-width:800px)");
+  const matches1k = useMediaQuery("(min-width:1000px)");
+  const matches1k2 = useMediaQuery("(min-width:1200px)");
+
+  // const [checked, setchecked] = React.useState(false);
+
   const showOwnPosts = useSelector((state) => state.user.showMyPosts);
   const showWelcome = useSelector((state) => state.user.showWelcome);
 
-  const expanded = false
+  const expanded = false;
   const [isLiked, setIsLiked] = React.useState(false);
 
   const handleDelete = (e) => {
@@ -82,12 +90,26 @@ const Posts = () => {
         .reverse()
         ?.map((e) =>
           e.sharedBy === firebase.auth().currentUser.email.split("@")[0] ? (
+            <Box
+          sx={{
+            display: checked && matches800 ? "inline-block" : "block",
+            width: checked && matches800 ? "50%" : "100%",
+            margin: "10px 0px",
+          }}
+        >
             <Card
               key={e.id}
               sx={{
-                width: matches ? "90%" : "97%",
-                display: "block",
-                margin: "20px auto",
+                width: checked && matches800
+                  ? "88%"
+                  : matches1k2
+                  ? "57%"
+                  : matches1k
+                  ? "63%"
+                  : matches800 ?  "76%" : matches600 ? '84%' : matches400 ? '93%' : '98%',
+                display: checked && matches800 ? "inline-block" : "block",
+                // margin: checked ? "30px" : "20px auto",
+                margin: checked && matches800 ? "0px 6%" : "20px auto",
               }}
             >
               <CardHeader
@@ -121,7 +143,7 @@ const Posts = () => {
               <CardContent sx={{ padding: "15px 20px 0px" }}>
                 <Typography variant="body1" color="text.secondary">
                   <Typography
-                    sx={{ display: "inline" }}
+                    sx={{ display: "inline",fontSize:'1.1rem' }}
                     variant="body1"
                     color="text.primary"
                   >
@@ -164,7 +186,7 @@ const Posts = () => {
                   <Modals e={e} />
                 </ExpandMore>
               </CardActions>
-            </Card>
+            </Card></Box>
           ) : (
             <div></div>
           )
@@ -177,81 +199,101 @@ const Posts = () => {
       .slice(0)
       .reverse()
       ?.map((e) => (
-        <Card
-          key={e.id}
+        <Box
           sx={{
-            width: matches ? "90%" : "97%",
-            display: "block",
-            margin: "20px auto",
+            display: checked && matches800 ? "inline-block" : "block",
+            width: checked && matches800 ? "50%" : "100%",
+            margin: "10px 0px",
           }}
         >
-          <CardHeader
-            avatar={
-              <Avatar src={e.pp} sx={{ bgcolor: red[500] }} aria-label="recipe">
-                {e.pp}
-              </Avatar>
-            }
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            }
-            title={e.title}
-            subheader={e.date}
-          />
-          <CardMedia
-            sx={{ maxHeight: "50vh" }}
-            component="img"
-            image={e.img}
-            alt="img"
-          />
-          <CardContent sx={{ padding: "15px 20px 0px" }}>
-            <Typography variant="body1" color="text.secondary">
-              <Typography
-                sx={{ display: "inline" }}
-                variant="body1"
-                color="text.primary"
-              >
-                {" "}
-                {e.sharedBy}:{" "}
+          
+          <Card
+            key={e.id}
+            sx={{
+              width: checked && matches800
+                ? "88%"
+                : matches1k2
+                ? "57%"
+                : matches1k
+                ? "63%"
+                : matches800 ?  "76%" : matches600 ? '84%' : matches400 ? '93%' : '98%',
+              display: checked && matches800 ? "inline-block" : "block",
+              // margin: checked ? "30px" : "20px auto",
+              margin: checked && matches800 ? "0px 6%" : "20px auto",
+            }}
+          >
+            <CardHeader
+              avatar={
+                <Avatar
+                  src={e.pp}
+                  sx={{ bgcolor: red[500] }}
+                  aria-label="recipe"
+                >
+                  {e.pp}
+                </Avatar>
+              }
+              action={
+                <IconButton aria-label="settings">
+                  <MoreVertIcon />
+                </IconButton>
+              }
+              title={e.title}
+              subheader={e.date}
+            />
+            <CardMedia
+              sx={{ maxHeight:matches600? "50vh" : '40vh', height: checked && matches800 ? "35vh" : "auto" }}
+              component="img"
+              image={e.img}
+              alt="img"
+            />
+            <CardContent sx={{ padding: "15px 20px 0px" }}>
+              <Typography variant="body1" color="text.secondary">
+                <Typography
+                  sx={{ display: "inline",fontSize:'1.1rem' }}
+                  variant="body1"
+                  color="text.primary"
+                >
+                  {" "}
+                  {e.sharedBy}:{" "}
+                </Typography>
+                {e.content}
               </Typography>
-              {e.content}
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            <IconButton
-              onClick={() => {
-                handleLiked(e.id);
-              }}
-              aria-label="add to favorites"
-            >
-              <FavoriteIcon sx={{ color: e.like ? "red" : "gray" }} />
-              <p style={{ margin: "0px 5px", fontSize: "1.2rem" }}>
-                {e.likeCounter}
-              </p>
-            </IconButton>
-            <IconButton
-              onClick={() => {
-                copyToClipboard(window.location.href);
-              }}
-              aria-label="share"
-            >
-              <ShareIcon />
-            </IconButton>
-            <ExpandMore
-              expand={expanded}
-              aria-label="show more"
-              sx={{
-                height: "40px",
-                borderRadius: "18%",
-                color: "#1976d2",
-                fontSize: "1.2rem",
-              }}
-            >
-              <Modals e={e} />
-            </ExpandMore>
-          </CardActions>
-        </Card>
+            </CardContent>
+            <CardActions disableSpacing>
+              <IconButton
+                onClick={() => {
+                  handleLiked(e.id);
+                }}
+                aria-label="add to favorites"
+              >
+                <FavoriteIcon sx={{ color: e.like ? "red" : "gray" }} />
+                <p style={{ margin: "0px 5px", fontSize: "1.2rem" }}>
+                  {e.likeCounter}
+                </p>
+              </IconButton>
+              <IconButton
+                onClick={() => {
+                  copyToClipboard(window.location.href);
+                }}
+                aria-label="share"
+              >
+                <ShareIcon />
+              </IconButton>
+              <ExpandMore
+                expand={expanded}
+                aria-label="show more"
+                sx={{
+                  height: "40px",
+                  borderRadius: "18%",
+                  color: "#1976d2",
+                  fontSize: "1.2rem",
+                }}
+              >
+                <Modals e={e} />
+              </ExpandMore>
+            </CardActions>
+          </Card>
+        </Box>
       ))
   ) : (
     <SignIn />

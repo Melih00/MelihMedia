@@ -14,10 +14,15 @@ import { ToastContainer } from "react-toastify";
 const App = () => {
   const didUserLogin = useSelector((state) => state.user.isUserLogin);
   const dispatch = useDispatch();
+  const [checked, setChecked] = React.useState(false);
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    console.log(checked)
+  };
   console.log(didUserLogin,dispatch)
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar checked={checked} handleChange={handleChange} />
       <Switch>
         <Route exact path="/">
           <Register />
@@ -29,7 +34,7 @@ const App = () => {
           {firebase.auth().currentUser ? <NewPost /> : <SignIn/>}
         </Route>
         <Route exact path="/posts">
-          {firebase.auth().currentUser ? <Posts /> : <SignIn/>}
+          {firebase.auth().currentUser ? <Posts checked={checked} /> : <SignIn/>}
         </Route>
         <Route>
           <SignIn />
