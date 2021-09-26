@@ -41,6 +41,8 @@ const ExpandMore = styled((props) => {
 
 function NewPost() {
   const history = useHistory();
+  const userName = firebase.auth()?.currentUser?.email.split("@")[0].replace(/[0-9]/g, '');
+  console.log(userName)
   const { postList } = useFetch();
   const [content, setContent] = useState("");
   const [imgUrl, setImgUrl] = useState("");
@@ -65,9 +67,9 @@ function NewPost() {
         counter: postList.length,
         img: imgUrl,
         pp: firebase.auth().currentUser.photoURL,
-        sharedBy: firebase.auth().currentUser.email.split("@")[0],
+        sharedBy: userName,
         content: content,
-        title: firebase.auth().currentUser.email.split("@")[0],
+        title: userName,
         liked: false,
         date: Date()
           .toString()
