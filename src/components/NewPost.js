@@ -172,7 +172,7 @@ function NewPost() {
       margin:'auto',
       display:'flex',
       width:'50%',
-      padding:'0'
+      padding:'0px'
     }}>
    
     <Box
@@ -180,12 +180,13 @@ function NewPost() {
         margin: "0",
         fontSize: "20px",
         boxSizing: "border-box",
-        display: "inline",
+        display: "inline-block",
         height: "auto",
+        width: '100%',
         textAlign: "center",
       }}
       >
-      Do not share meaningless content. It'll be seen by every user
+      Do not share meaningless content.<br/> It'll be seen by every user
     </Box>
       </Box>
       <Box
