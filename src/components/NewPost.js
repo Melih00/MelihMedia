@@ -41,8 +41,11 @@ const ExpandMore = styled((props) => {
 
 function NewPost() {
   const history = useHistory();
-  const userName = firebase.auth()?.currentUser?.email.split("@")[0].replace(/[0-9]/g, '');
-  console.log(userName)
+  const userName = firebase
+    .auth()
+    ?.currentUser?.email.split("@")[0]
+    .replace(/[0-9]/g, "");
+  console.log(userName);
   const { postList } = useFetch();
   const [content, setContent] = useState("");
   const [imgUrl, setImgUrl] = useState("");
@@ -83,6 +86,12 @@ function NewPost() {
     successToastify("Post Shared!");
   };
   const matches = useMediaQuery("(max-width:500px)");
+  const matches400 = useMediaQuery("(min-width:400px)");
+  const matches500 = useMediaQuery("(min-width:500px)");
+  const matches600 = useMediaQuery("(min-width:600px)");
+  const matches800 = useMediaQuery("(min-width:800px)");
+  const matches1k = useMediaQuery("(min-width:1000px)");
+  const matches1k2 = useMediaQuery("(min-width:1200px)");
   const horizontal = matches ? "vertical" : "horizontal";
   const horizontal1 = matches
     ? "vertical small contained button group"
@@ -168,26 +177,30 @@ function NewPost() {
       sx={{
         "& > :not(style)": { margin: "30px auto" },
       }}
-    >  <Box sx={{
-      margin:'auto',
-      display:'flex',
-      width:'50%',
-      padding:'0px'
-    }}>
-   
-    <Box
-      sx={{
-        margin: "0",
-        fontSize: "20px",
-        boxSizing: "border-box",
-        display: "inline-block",
-        height: "auto",
-        width: '100%',
-        textAlign: "center",
-      }}
+    >
+      {" "}
+      <Box
+        sx={{
+          margin: "auto",
+          display: "flex",
+          width: "50%",
+          padding: "0px",
+        }}
       >
-      Do not share meaningless content.<br/> It'll be seen by every user
-    </Box>
+        <Box
+          sx={{
+            margin: "0",
+            fontSize: "20px",
+            boxSizing: "border-box",
+            display: "inline-block",
+            height: "auto",
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          Do not share meaningless content.
+          <br /> It'll be seen by every user
+        </Box>
       </Box>
       <Box
         component="form"
@@ -228,88 +241,106 @@ function NewPost() {
     <>
       <Box
         sx={{
-          width: "52ch",
+          width: matches500 ? "52ch" : '26ch',
           display: "block",
-          margin: "30px auto",
+          margin: matches500?"30px auto":'23px auto 15px',
           fontSize: "20px",
           textAlign: "center",
         }}
         autoComplete="off"
       >
         Your Post will be look like this when you share it :
-      </Box>
-      <Card
+      </Box>{" "}
+      <Box
         sx={{
-          width: matches ? "90%" : "97%",
           display: "block",
-          margin: "20px auto",
+          width: "100%",
+          margin: "10px auto",
         }}
       >
-        <CardHeader
-          avatar={
-            <Avatar
-              src={firebase.auth().currentUser?.photoURL}
-              sx={{ bgcolor: red[500] }}
-              aria-label="recipe"
-            ></Avatar>
-          }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={firebase.auth().currentUser.email.split("@")[0]}
-          subheader={Date()
-            .toString()
-            .substr(0, 11)
-            .concat(Date().toString().substr(15, 6))}
-        />
-        <CardMedia
-          sx={{ maxHeight: "60vh" }}
-          component="img"
-          image={imgUrl}
-          alt="img link broken"
-        />
-        <CardContent sx={{ padding: "15px 20px 0px" }}>
-          <Typography variant="body1" color="text.secondary">
-            <Typography
-              sx={{ display: "inline" }}
-              variant="body1"
-              color="text.primary"
-            >
-              {" "}
-              {firebase.auth().currentUser.email.split("@")[0]}:{" "}
+        <Card
+          sx={{
+            width: matches1k2
+              ? "57%"
+              : matches1k
+              ? "63%"
+              : matches800
+              ? "76%"
+              : matches600
+              ? "84%"
+              : matches400
+              ? "94%"
+              : "100%",
+            display: "block",
+            margin: "20px auto",
+          }}
+        >
+          <CardHeader
+            avatar={
+              <Avatar
+                src={firebase.auth().currentUser?.photoURL}
+                sx={{ bgcolor: red[500] }}
+                aria-label="recipe"
+              ></Avatar>
+            }
+            action={
+              <IconButton aria-label="settings">
+                <MoreVertIcon />
+              </IconButton>
+            }
+            title={firebase.auth().currentUser.email.split("@")[0]}
+            subheader={Date()
+              .toString()
+              .substr(0, 11)
+              .concat(Date().toString().substr(15, 6))}
+          />
+          <CardMedia
+            sx={{ maxHeight: "60vh" }}
+            component="img"
+            image={imgUrl}
+            alt="img link broken"
+          />
+          <CardContent sx={{ padding: "15px 20px 0px" }}>
+            <Typography variant="body1" color="text.secondary">
+              <Typography
+                sx={{ display: "inline" }}
+                variant="body1"
+                color="text.primary"
+              >
+                {" "}
+                {firebase.auth().currentUser.email.split("@")[0]}:{" "}
+              </Typography>
+              {content}
             </Typography>
-            {content}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon sx={{ color: true ? "red" : "gray" }} />
-            <p style={{ margin: "0px 5px", fontSize: "1.2rem" }}>9</p>
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              copyToClipboard("a");
-            }}
-            aria-label="share"
-          >
-            <ShareIcon />
-          </IconButton>
-          <ExpandMore
-            expand={expanded}
-            aria-label="show more"
-            sx={{
-              height: "40px",
-              borderRadius: "18%",
-              color: "#1976d2",
-              fontSize: "1.2rem",
-            }}
-          >
-            <Modals e={{ img: imgUrl }} />
-          </ExpandMore>
-        </CardActions>
-      </Card>{" "}
+          </CardContent>
+          <CardActions disableSpacing>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon sx={{ color: true ? "red" : "gray" }} />
+              <p style={{ margin: "0px 5px", fontSize: "1.2rem" }}>9</p>
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                copyToClipboard("a");
+              }}
+              aria-label="share"
+            >
+              <ShareIcon />
+            </IconButton>
+            <ExpandMore
+              expand={expanded}
+              aria-label="show more"
+              sx={{
+                height: "40px",
+                borderRadius: "18%",
+                color: "#1976d2",
+                fontSize: "1.2rem",
+              }}
+            >
+              <Modals e={{ img: imgUrl }} />
+            </ExpandMore>
+          </CardActions>
+        </Card>
+      </Box>
       <Box sx={{ width: "100%", margin: "30px 0px" }}>
         <Box
           sx={{
@@ -324,7 +355,7 @@ function NewPost() {
         >
           <ButtonGroup
             size="small"
-            sx={{ width: "90%" }}
+            sx={{ width: matches1k? '55%' : matches800 ? "65%" : matches500 ? "80%" : "100%" }}
             orientation={horizontal}
             aria-label={horizontal1}
             variant="contained"
