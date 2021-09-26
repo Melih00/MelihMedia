@@ -47,12 +47,15 @@ const Navbar = ({ checked, handleChange }) => {
   const userName = firebase.auth()?.currentUser?.email.split("@")[0].replace(/[0-9]/g, '');
   const label = { inputProps: { "aria-label": "Switch demo" } };
   React.useEffect(() => {
-    setOpacity(1);
-    setDisabled(true);
-    setTimeout(() => {
-      setDisabled(false);
-      setOpacity(0);
-    }, 2000);
+    if(firebase.auth().currentUser){
+
+      setOpacity(1);
+      setDisabled(true);
+      setTimeout(() => {
+        setDisabled(false);
+        setOpacity(0);
+      }, 2000);
+    }
   }, [checked]);
   return (
     <ThemeProvider theme={theme}>
