@@ -166,9 +166,28 @@ function NewPost() {
   return !view ? (
     <Box
       sx={{
-        "& > :not(style)": { margin: "60px auto" },
+        "& > :not(style)": { margin: "30px auto" },
       }}
-    >
+    >  <Box sx={{
+      margin:'auto',
+      display:'flex',
+      width:'50%',
+      padding:'0'
+    }}>
+   
+    <Box
+      sx={{
+        margin: "0",
+        fontSize: "20px",
+        boxSizing: "border-box",
+        display: "inline",
+        height: "auto",
+        textAlign: "center",
+      }}
+      >
+      Do not share meaningless content. It'll be seen by every user
+    </Box>
+      </Box>
       <Box
         component="form"
         sx={{
@@ -176,7 +195,7 @@ function NewPost() {
             m: 1,
             width: "25ch",
             display: "flex",
-            margin: "10px auto",
+            margin: "12px auto",
           },
         }}
         noValidate
