@@ -1,1 +1,1 @@
-melih-media.vercel.app
+https://melih-media.vercel.app/
